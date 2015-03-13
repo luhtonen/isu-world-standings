@@ -38,6 +38,6 @@
   },
   "scripts": {
     "test": "grunt test",
-    "postinstall": "bower install --config.interactive=false"
+    "postinstall": "bower install --config.interactive=false && grunt"
   }
 }
