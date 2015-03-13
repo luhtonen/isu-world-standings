@@ -1,6 +1,6 @@
 {
-  "name": "isuworldstandings",
-  "version": "0.0.0",
+  "name": "isu-world-standings",
+  "version": "0.0.1",
   "dependencies": {},
   "repository": {},
   "devDependencies": {
@@ -37,6 +37,7 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt test",
+    "postinstall": "bower install --config.interactive=false"
   }
 }
