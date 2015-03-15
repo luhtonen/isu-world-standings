@@ -1,1 +1,36 @@
 <p>Estimated ISU World Standings for next season 2015/2016</p>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <td colspan="4"></td>
+      <td>ISU World Champion-ships (or Olympic Winter Games)</td>
+      <td colspan="2">ISU (Junior) Grand Prix and Final</td>
+      <td colspan="2">Selected International Competition</td>
+    </tr>
+    <tr>
+      <th>#</th>
+      <th>Points</th>
+      <th>Skater</th>
+      <th>Seasons</th>
+      <th>best</th>
+      <th>best</th>
+      <th>2nd best</th>
+      <th>best</th>
+      <th>2nd best</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="skater in skaters | orderBy: '-points' ">
+      <td>{{$index + 1}}</td>
+      <td>{{skater.points}}</td>
+      <td>{{skater.name}} <img ng-src="images/flags/{{skater.country}}.png" alt="{{skater.country}}" title="{{skater.country}}"></td>
+      <td class="seasons">{{skater.seasons[0].season}}<br/>{{skater.seasons[1].season}}</td>
+      <td class="isu-points">{{skater.seasons[0].bestISU}}<br/>{{skater.seasons[1].bestISU}}</td>
+      <td class="other-points">{{skater.seasons[0].bestGP}}<br/>{{skater.seasons[1].bestGP}}</td>
+      <td class="other-points">{{skater.seasons[0].secondGP}}<br/>{{skater.seasons[1].secondGP}}</td>
+      <td class="other-points">{{skater.seasons[0].bestOther}}<br/>{{skater.seasons[1].bestOther}}</td>
+      <td class="other-points">{{skater.seasons[0].secondOther}}<br/>{{skater.seasons[1].secondOther}}</td>
+    </tr>
+  </tbody>
+</table>
