@@ -11,13 +11,12 @@ angular.module('isuWorldStandingsApp')
   .controller('MainCtrl', ['$scope', 'isuwsService', function ($scope, isuwsService) {
     isuwsService.getLadies().success(function(response) {
       $scope.skaters = parseHtml(response);
-      console.log('MainCtrl: skaters found = ' + $scope.skaters.length);
+      $scope.lastUpdated = angular.element(response).find('#DataList1').find('tr').last().find('td').text();
     });
 
     function parseHtml(data) {
       var rows = angular.element(data).find('#DataList1').find('.content');
       var skaters = [];
-      console.log('rows count = ' + rows.length);
       for (var i = 0; i < rows.length; i++) {
         var skater = {};
         var row = angular.element(rows[i]);
