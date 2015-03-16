@@ -9,10 +9,23 @@
  */
 angular.module('isuWorldStandingsApp')
   .controller('MainCtrl', ['$scope', 'isuwsService', function ($scope, isuwsService) {
+    isuwsService.getCountries().success(function(response) {
+      $scope.counries = response;
+      console.log('countries count = ' + $scope.counries.length);
+    });
+
     isuwsService.getLadies().success(function(response) {
       $scope.skaters = parseHtml(response);
       $scope.lastUpdated = angular.element(response).find('#DataList1').find('tr').last().find('td').text();
     });
+
+    function countryLookup(iocCode) {
+      for (var i = 0; i < $scope.counries.length; i++) {
+        if ($scope.counries[i].ioc === iocCode) {
+          return $scope.counries[i];
+        }
+      }
+    }
 
     function parseHtml(data) {
       var rows = angular.element(data).find('#DataList1').find('.content');
@@ -28,7 +41,7 @@ angular.module('isuWorldStandingsApp')
         if (!!a.attr('class')) {
           skater.class = a.attr('class');
         }
-        skater.country = row.find('.name').find('span').text();
+        skater.country = countryLookup(row.find('.name').find('span').text());
         skater.seasons = parseSeasons(row);
         skater.points = calculatePoints(skater.seasons);
         skaters[i] = skater;

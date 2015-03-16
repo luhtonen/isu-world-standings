@@ -19,5 +19,9 @@ angular.module('isuWorldStandingsApp').
       return $http.get('/data/wsdance.htm');
     };
 
+    isuwsApi.getCountries = function() {
+      return $http.get('/data/countries.json');
+    };
+
     return isuwsApi;
   }]);

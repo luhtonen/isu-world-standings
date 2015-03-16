@@ -65,3 +65,7 @@ body {
 .other-points {
   width: 50px;
 }
+.flag {
+  position: relative;
+  top: -6px;
+}
