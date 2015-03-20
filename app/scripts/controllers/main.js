@@ -8,16 +8,14 @@
  * Controller of the isuWorldStandingsApp
  */
 angular.module('isuWorldStandingsApp')
-  .controller('MainCtrl', ['$scope', 'isuwsService', function ($scope, isuwsService) {
+  .controller('MainCtrl', ['$scope', '$location', 'isuwsService', function ($scope, $location, isuwsService) {
     isuwsService.getCountries().success(function(response) {
       $scope.counries = response;
-      console.log('countries count = ' + $scope.counries.length);
     });
 
-    isuwsService.getLadies().success(function(response) {
-      $scope.skaters = parseHtml(response);
-      $scope.lastUpdated = angular.element(response).find('#DataList1').find('tr').last().find('td').text();
-    });
+    this.getLastUpdated = function(response) {
+      return angular.element(response).find('#DataList1').find('tr').last().find('td').text();
+    };
 
     function countryLookup(iocCode) {
       for (var i = 0; i < $scope.counries.length; i++) {
@@ -27,7 +25,7 @@ angular.module('isuWorldStandingsApp')
       }
     }
 
-    function parseHtml(data) {
+    this.parseHtml = function(data) {
       var rows = angular.element(data).find('#DataList1').find('.content');
       var skaters = [];
       for (var i = 0; i < rows.length; i++) {
@@ -46,9 +44,8 @@ angular.module('isuWorldStandingsApp')
         skater.points = calculatePoints(skater.seasons);
         skaters[i] = skater;
       }
-      console.log('skaters count = ' + skaters.length);
       return skaters;
-    }
+    };
 
     function calculatePoints(seasons) {
       var points = 0;
@@ -109,4 +106,36 @@ angular.module('isuWorldStandingsApp')
       }
       return defaultValue;
     }
+  }])
+  .controller('MenCtrl', ['$scope', '$controller', 'isuwsService', function($scope, $controller, isuwsService) {
+    var mainCtrl = $controller('MainCtrl', {$scope: $scope});
+    isuwsService.getMen().success(function(response) {
+      $scope.skaters = mainCtrl.parseHtml(response);
+      $scope.activeTab = 'men';
+      $scope.lastUpdated = mainCtrl.getLastUpdated(response);
+    });
+  }])
+  .controller('LadiesCtrl', ['$scope', '$controller', 'isuwsService', function($scope, $controller, isuwsService) {
+    var mainCtrl = $controller('MainCtrl', {$scope: $scope});
+    isuwsService.getLadies().success(function(response) {
+      $scope.skaters = mainCtrl.parseHtml(response);
+      $scope.activeTab = 'ladies';
+      $scope.lastUpdated = mainCtrl.getLastUpdated(response);
+    });
+  }])
+  .controller('PairsCtrl', ['$scope', '$controller', 'isuwsService', function($scope, $controller, isuwsService) {
+    var mainCtrl = $controller('MainCtrl', {$scope: $scope});
+    isuwsService.getPairs().success(function(response) {
+      $scope.skaters = mainCtrl.parseHtml(response);
+      $scope.activeTab = 'pairs';
+      $scope.lastUpdated = mainCtrl.getLastUpdated(response);
+    });
+  }])
+  .controller('DanceCtrl', ['$scope', '$controller', 'isuwsService', function($scope, $controller, isuwsService) {
+    var mainCtrl = $controller('MainCtrl', {$scope: $scope});
+    isuwsService.getDance().success(function(response) {
+      $scope.skaters = mainCtrl.parseHtml(response);
+      $scope.activeTab = 'dance';
+      $scope.lastUpdated = mainCtrl.getLastUpdated(response);
+    });
   }]);
