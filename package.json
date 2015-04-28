@@ -4,17 +4,12 @@
   "description": "Estimation of ISU World Standings for the next season based on the current ISU World Standings published on ISU site.",
   "author": "Eduard Luhtonen <luhtonen@gmail.com>",
   "license": "MIT",
-  "dependencies": {
-    "bower": "^1.4.1",
-    "grunt": "^0.4.5",
-    "grunt-cli": "^0.1.13"
-  },
+  "dependencies": {},
   "repository": {
     "type": "git",
     "url": "https://github.com/luhtonen/isu-world-standings.git"
   },
   "devDependencies": {
-    "bower": "^1.4.1",
     "grunt": "^0.4.5",
     "grunt-autoprefixer": "^2.0.0",
     "grunt-concurrent": "^1.0.0",
