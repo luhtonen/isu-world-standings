@@ -4,23 +4,23 @@ angular.module('isuWorldStandingsApp').
   factory('isuwsService', ['$http', function($http) {
     var isuwsApi = {};
     isuwsApi.getLadies = function() {
-      return $http.get('/data/wsladies.htm');
+      return $http.get('data/wsladies.htm');
     };
 
     isuwsApi.getMen = function() {
-      return $http.get('/data/wsmen.htm');
+      return $http.get('data/wsmen.htm');
     };
 
     isuwsApi.getPairs = function() {
-      return $http.get('/data/wspairs.htm');
+      return $http.get('data/wspairs.htm');
     };
 
     isuwsApi.getDance = function() {
-      return $http.get('/data/wsdance.htm');
+      return $http.get('data/wsdance.htm');
     };
 
     isuwsApi.getCountries = function() {
-      return $http.get('/data/countries.json');
+      return $http.get('data/countries.json');
     };
 
     return isuwsApi;

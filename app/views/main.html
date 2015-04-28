@@ -25,7 +25,7 @@
     <tr ng-repeat="skater in skaters | orderBy: '-points' ">
       <td>{{$index + 1}}</td>
       <td>{{skater.points}}</td>
-      <td>{{skater.name}} <img class="flag" ng-src="/images/flags/{{skater.country.alpha2}}.png" alt="{{skater.country.name}}" title="{{skater.country.name}}"></td>
+      <td>{{skater.name}} <img class="flag" ng-src="images/flags/{{skater.country.alpha2}}.png" alt="{{skater.country.name}}" title="{{skater.country.name}}"></td>
       <td class="seasons">{{skater.seasons[0].season}}<br/>{{skater.seasons[1].season}}</td>
       <td class="isu-points">{{skater.seasons[0].bestISU}}<br/>{{skater.seasons[1].bestISU}}</td>
       <td class="other-points">{{skater.seasons[0].bestGP}}<br/>{{skater.seasons[1].bestGP}}</td>
